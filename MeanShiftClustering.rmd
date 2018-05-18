@@ -1,0 +1,25 @@
+```{r}
+# Biblioteca necessaria para carregar dados
+library(datasets)
+# Biblioteca para plotar dados em um gr?fico
+library(ggplot2)
+# Biblioteca para carregar o algoritmo
+library(MeanShift)
+
+# foi utilizado os dados da base iris da biblioteca datasets
+# foram colocadas apenas duas colunas nessa base, sendo elas a distancia das petalas
+indices <- sample( 1:nrow( iris ), 150 )
+corpus_treinamento <-t( iris[indices,c( "Petal.Length", "Petal.Width" )] )
+
+# aplicando o msClustering
+# nesse algoritmo n?o definimos o n?mero de particoes, o modelo ir? automaticamente identificar os clusters.
+irisCluster <- msClustering( corpus_treinamento, h=0.8 )
+
+
+# representacao grafica do modelo
+plot( corpus_treinamento[1,], corpus_treinamento[2,], col=irisCluster$labels, cex=0.8, pch=16, xlab="Petal.Length", ylab="Petal.Width")
+
+# apresenta resultados do modelo.
+print(irisCluster)
+
+``` 
